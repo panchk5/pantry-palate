@@ -89,10 +89,10 @@ export default function Scan() {
           <a className='fixed bottom-20 left-10 bg-dark text-white rounded-full py-2 px-4' href="/scan">&lt;</a>
 
           <button
-            className='w-20 h-20 mt-8 rounded-full bg-white text-white'
+            className='w-16 h-16 mt-8 rounded-full bg-white text-white'
             onClick={capturePhoto}
           >
-            <img src="/img/camera.png" className="h-9 m-auto" />
+            <img src="/img/camera.png" className="h-7 m-auto" />
           </button>
         </div>
       )}
@@ -107,42 +107,31 @@ export default function Scan() {
               src={capturedImage}
               alt='Captured'
             />
-            <button
-              className='px-4 py-2 bg-red-500 text-white rounded-lg'
+          </div>
+
+          <div className='fixed bottom-10 left-5 right-5 p-5 flex justify-between'>
+          <button
+              className='bg-white text-white rounded-full py-2 px-2 flex items-center justify-center'
               onClick={() => {
                 setCapturedImage('');
                 startCamera();
               }}
             >
-              Retake
+              <img src="/img/retake.svg" className="h-6 m-auto" />
             </button>
-            <br />
-            <button
-              className='px-4 py-2 bg-white text-bg rounded-full cursor-pointer'
+
+            <button 
+              className='px-4 py-2 bg-white text-bg text-sm rounded-full cursor-pointer'
               onClick={sendData}
-            // dont href since it wont wait for the fetch to finish
-            // also switched to button cuz <a> doesnt make sense here
-            // href='/questions'
             >
-              Ok
+              Confirm →
             </button>
-
-
           </div>
-
-          {/* <div className='fixed bottom-5 left-5 right-5 p-5 flex justify-between'>
-            <a className='bg-dark text-white rounded-full py-2 px-4' href="/">&lt;</a>
-
-            <button
-              className='px-4 py-2 bg-white text-bg rounded-full'
-              onClick={startCamera}
-            >
-              Start Scanning →
-            </button>
-          </div> */}
         </>
 
       )}
+
+      
 
 
       {!cameraStatus && !capturedImage && (
@@ -151,26 +140,26 @@ export default function Scan() {
           {/* Show instructions and request camera permissions first */}
           <div className='lg:m-auto lg:max-w-[40%] mx-[10%] flex flex-col items-center'>
 
-
             <img src="/img/food.png" className="h-32 mt-12 mb-20" />
             <h1 className='text-4xl font-medium text-white mb-4'>Instructions</h1>
             <br />
             <div className="h-[3px] w-28 bg-white justify-center mb-8"></div>
             <div className=' flex flex-col gap-5 text-white mb-2 p-3'>
-              <p>1. Scan food using camera. You may take multiple photos</p>
-              <p>2. your photo will be processed with ai and stuff wowow</p>
-              <p>3. Discover new ai enhanced recipes!</p>
+              <p>1. Please allow camera perimissions</p>
+              <p>2. Place the camera in front of objects in a fridge </p>
+              <p>3. Upon scanning the items, it will generate a list of ingredients. Please add/remove the ingredients as you so choose</p>
+              <p>4. Happy cooking!</p>
             </div>
           </div>
 
           <div className='fixed bottom-5 left-5 right-5 p-5 flex justify-between'>
             <a className='bg-dark text-white rounded-full py-2 px-4' href="/">&lt;</a>
 
-            <button
-              className='px-4 py-2 bg-white text-bg rounded-full'
+            <button 
+              className='px-4 py-2 bg-white text-bg text-sm rounded-full'
               onClick={startCamera}
             >
-              Start Scanning →
+              Start Scan →
             </button>
           </div>
 
