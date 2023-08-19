@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, NavLink } from 'react-router-dom'
+import Context from './components/context'
 
 function App() {
   return (
