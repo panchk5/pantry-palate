@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from 'react';
-import { Data } from '../../components/context';
+import { Data } from '../components/context';
 import { useNavigate } from 'react-router-dom';
 
 export default function Scan() {

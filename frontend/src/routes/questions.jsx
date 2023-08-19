@@ -1,10 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
-import { Data } from '../../components/context'
+import { Data, RecipeData } from '../components/context'
+import { useNavigate } from 'react-router-dom';
 
 export default function Questions() {
   // const [ingredientList, setIngredientList] = useState([])
   const [inputText, setInputText] = useState('')
   const { modelData, setModelData } = useContext(Data)
+  const { recipeData, setRecipeData } = useContext(RecipeData);
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     console.log(modelData)
@@ -26,6 +31,40 @@ export default function Questions() {
       }
     }
   }
+
+  const sendData = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/retrieve-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Set the correct content type
+        },
+        body: JSON.stringify({ recipeData: JSON.stringify(modelData)}),
+      });
+
+      if (response.ok) {
+        console.log('Food data sent successfully');
+      } else {
+        console.error('Error sending food data to server');
+        alert('Error sending food data to server');
+      }
+
+      const _data = await response.json();
+
+      setRecipeData(_data)
+
+      console.log(_data);
+
+      navigate('/recipes')
+
+
+      // redirect to questions page
+      // navigate('/questions')
+    } catch (error) {
+      console.error('Error sending image data:', error);
+    }
+  };
+
 
   return (
     <>
@@ -65,30 +104,24 @@ export default function Questions() {
           <label className='flex justify-center mt-3'>
             <input
               placeholder='Any missing ingredients?'
-              className='bg-card rounded-3xl text-sm p-3 my-2 w-full mb-6'
+              className='bg-card rounded-3xl text-sm p-3 m-2 w-full mb-8'
               type='text'
               value={inputText}
               onChange={handleInputChange}
             />
           </label>
           <button
-            className='bg-bg rounded-3xl py-2 px-4 border border-white transition-all outline-2 flex flex-row justify-center mb-8'
+            className='bg-primary rounded-3xl py-2 px-4 hover:bg-white transition-all outline-2 flex flex-row justify-center mb-8'
             type='submit'
-            >
-            <p className="text-white text-sm">Add to List</p>
+          >
+            Add to List
           </button>
         </form>
       </div>
 
-      <div className='fixed bottom-5 left-5 right-5 p-5 flex justify-between'>
-        <a className='bg-dark text-white rounded-full py-2 px-4' href="/">&lt;</a>
-
-        <button 
-            className='px-4 py-2 bg-white text-bg text-sm rounded-full'
-        >
-            Start Scan →
-        </button>
-      </div>
+      <button className='px-4 py-2 bg-white text-bg text-sm rounded-full cursor-pointer' onClick={sendData}>
+          Confirm →
+      </button>
     </>
   )
 }

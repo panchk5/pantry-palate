@@ -1,29 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Home from "./routes/home.jsx";
-import About from "./routes/about.jsx";
-import Scan from './routes/scan/scan-p1.jsx';
-import Questions from './routes/scan/scan-p2.jsx';
+import Scan from './routes/scan'
+import Questions from './routes/questions'
+import Recipes from './routes/recipes'
+import Home from './routes/home.jsx'
 import Context from './components/context.jsx'
-
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
-      },
-      {
-        path: "/about",
-        element: <About />
       },
       {
         path: '/scan',
@@ -33,9 +28,13 @@ const router = createBrowserRouter([
         path: '/questions',
         element: <Questions />,
       },
+      {
+        path: '/recipes',
+        element: <Recipes />,
+      },
     ],
   },
-]);
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Context>
@@ -43,5 +42,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
     </React.StrictMode>
   </Context>
-);
-
+)
