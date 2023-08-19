@@ -58,7 +58,30 @@ def retrieve_recipe():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/chatbot', methods=['POST'])
+def retrieve_ingred():
+    try:
+        api_key = "VF.DM.64de5b79aa29af0007d93ee5.rnjQQkq2Rpp9DyPt"  # Replace with your Voiceflow API key
 
+        user_id = "user_123"  # Unique ID used to track conversation state
+
+        data = request.get_json()
+        message = data.get('message', '')
+
+
+        body = {"action": {"type": "text", "payload": message}}  # Use the actual message
+
+        response = requests.post(
+            f"https://general-runtime.voiceflow.com/state/user/{user_id}/interact",  # Update the endpoint
+            json=body,
+            headers={"Authorization": api_key},
+        )
+        
+        response_data = response.json()  # Get the JSON content from the response
+        return jsonify(response_data)  # Return the JSON response
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
