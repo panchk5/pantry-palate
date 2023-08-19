@@ -7,8 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./routes/home.jsx";
 import About from "./routes/about.jsx";
-import Scan from './routes/scan';
-import Questions from './routes/questions';
+import Scan from './routes/scan/scan-p1.jsx';
+import Questions from './routes/scan/scan-p2.jsx';
 import Context from './components/context.jsx'
 
 
