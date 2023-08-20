@@ -27,29 +27,29 @@ def make_recipe(food_list):
 
     return recipeData
 
-# print(make_recipe(food_list))
+def get_recipe(id):
+    recipe_url = "https://api.spoonacular.com/recipes/" + str(id) + "/information" 
+    headers = {"Content-Type": "application/json"}
+    params = {
+        "apiKey": key,
+    }
 
-# import os
-# import requests
-# key = os.getenv("SPOON_API_KEY")
+    response = requests.get(recipe_url, headers=headers, params=params)
+    recipeData = response.json()
 
-# API_URL = "https://api.spoonacular.com/recipes/findByIngredients"
+    return recipeData
 
-# # food_list = ["beef", "tomato"]
+def find_recipe(diet, intolerances):
+    headers = {"Content-Type": "application/json"}
+    params = {
+        "apiKey": key,
+        "instructionsRequired": True,
+        "addRecipeInformation": True,
+        "diet": diet,
+        "intolerances": intolerances,
+    }
 
+    response = requests.get('https://api.spoonacular.com/recipes/complexSearch', headers=headers, params=params)
+    recipeData = response.json()
 
-# def make_recipe(food_list):
-#     headers = {"Content-Type": "application/json"}
-#     params = {
-#         "ingredients": ",".join(food_list),
-#         "number": 1,
-#         "apiKey": key,
-#         "instructionsRequired": True,
-#         "addRecipeInformation": True,
-#         "ranking": 1,
-#         "sort": "min-missing-ingredients",
-#     }
-
-#     response = requests.get(API_URL, headers=headers, params=params)
-#     recipeData = response.json()
-#     return recipeData
+    return recipeData

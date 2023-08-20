@@ -15,7 +15,7 @@ CORS(app, origins=["http://localhost:5173"])
 upload_folder = './assets'
 
 from vision import image_ai
-from recipe import make_recipe
+from recipe import make_recipe, get_recipe, find_recipe
 
 @app.route('/upload-image', methods=['POST'])
 def handle_image_upload():
@@ -54,6 +54,33 @@ def retrieve_recipe():
         recipe_list = data['recipeData']
 
         result = make_recipe(recipe_list)
+        return json.dumps(result)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/get-recipe', methods= ['POST'])
+def get_recipe_route():
+    try:
+        data = request.json
+        recipe_id = data['recipe_id']
+
+        result = get_recipe(recipe_id)
+        return json.dumps(result)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/retrieve-recipe-with-restrictions', methods= ['POST'])
+def retrieve_recipe_with_restrictions():
+    try:
+        data = request.json
+
+        diet = str(data['diet'])
+        intolerances = str(data['intolerances'])
+
+        result = find_recipe(diet, intolerances)
         return json.dumps(result)
 
     except Exception as e:
