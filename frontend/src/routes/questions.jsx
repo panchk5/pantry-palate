@@ -39,7 +39,7 @@ export default function Questions() {
         headers: {
           'Content-Type': 'application/json', // Set the correct content type
         },
-        body: JSON.stringify({ recipeData: JSON.stringify(modelData)}),
+        body: JSON.stringify({ recipeData: modelData}),
       });
 
       if (response.ok) {
