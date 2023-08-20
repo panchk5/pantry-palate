@@ -11,6 +11,8 @@ import Recipes from "./routes/recipes";
 import Home from "./routes/home.jsx";
 import Context from "./components/context.jsx";
 import Shop from "./routes/shop.jsx";
+import AccomodationRecipe from "./routes/accomodation_recipes.jsx";
+import Chat from "./routes/chat.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/accomodation",
+        element: <AccomodationRecipe />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
       },
     ],
   },

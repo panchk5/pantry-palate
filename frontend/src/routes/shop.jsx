@@ -87,7 +87,7 @@ function Allergy({ name, emoji, selectedAllergies, setSelectedAllergies }) {
 }
 
 export default function Shop() {
-  const { recipeData, setRecipeData } = useContext(RecipeData); //use it on the next page
+  const { recipeData, setRecipeData } = useContext(RecipeData);
 
   const [selectedRestrictions, setSelectedRestrictions] = useState([]);
   const [selectedAllergies, setSelectedAllergies] = useState([]);
@@ -126,11 +126,10 @@ export default function Shop() {
 
       const _data = await response.json();
 
-      console.log(_data);
       setRecipeData(_data);
 
-      // redirect to questions page
-      // navigate('/questions') LOOOOOK HEREEEE!!!!
+      // redirect to recipe page
+      navigate("/accomodation");
     } catch (error) {
       console.error("Error sending image data:", error);
     }

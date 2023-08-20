@@ -27,7 +27,7 @@ export default function Chat() {
         const newMessages = [
           ...messages,
           { text: userMessage, isUser: true },
-          { text: botMessage.payload.message, isUser: false }
+          { text: botMessage.payload.message, isUser: false },
         ];
         setMessages(newMessages); // Update messages array with user input and bot response
       }
@@ -38,8 +38,7 @@ export default function Chat() {
 
   useEffect(() => {
     const initialBotMessage = {
-      text:
-        "How can I help you with reusing your food scraps, or teach you how to plate your dish?",
+      text: "How can I help you with reusing your food scraps, or teach you how to plate your dish?",
       isUser: false,
     };
     setMessages([initialBotMessage]);
@@ -58,7 +57,7 @@ export default function Chat() {
             key={index}
             className={`mb-2 p-2 rounded-lg ${
               message.isUser
-                ? "bg-gray-100 text-gray self-end"
+                ? "bg-blue-500 text-white self-end"
                 : "bg-gray-200 text-gray-800 self-start"
             }`}
           >
