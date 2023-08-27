@@ -12,14 +12,14 @@ import requests
 
 load_dotenv()
 
+voiceFlowKey = os.getenv("VOICEFLOW_API_KEY")
+frontendUrl = os.getenv("FRONTEND_URL")
+
 app = Flask(__name__)
 CORS(app)
-CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=[frontendUrl])
 
 upload_folder = './assets'
-
-
-voiceFlowKey = os.getenv("VOICEFLOW_API_KEY")
 
 
 @app.route('/upload-image', methods=['POST'])
@@ -35,7 +35,7 @@ def handle_image_upload():
             f.write(decoded_data)
 
         # returns as json
-        result = image_ai('./assets/test_image.jpg')
+        result = image_ai('./assets/uploaded_image_.jpg')
         
         return result
         # return jsonify({'message': 'Image uploaded and processed successfully'})

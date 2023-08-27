@@ -7,8 +7,6 @@ key = os.getenv("SPOON_API_KEY")
 
 API_URL = "https://api.spoonacular.com/recipes/findByIngredients"
 
-# food_list = ['chicken', 'carrot', 'potato']
-
 def make_recipe(food_list):
     print(food_list)
     headers = {"Content-Type": "application/json"}
