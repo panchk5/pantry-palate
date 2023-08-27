@@ -45,6 +45,21 @@ const Card = ({ recipe }) => {
 
     return str.replace(/(<([^>]+)>)/gi, "");
   }
+  // if (!accomodation) {
+  //   return (
+  //     <>
+  //       <button
+  //         onClick={toggleCard}
+  //         className=" bg-white p-5 w-full rounded-2xl mb-5"
+  //       >
+  //         <div className={`recipe-card   ${isExpanded ? "expanded" : ""}`}>
+  //           <div
+  //             className="recipe-image h-[200px] w-[200px]"
+  //             style={backgroundImageStyle}
+  //           ></div>
+  //           <br />
+  //           <h3 className="font-bold">{recipe.title}</h3>
+  //           {/* Toggle button */}
 
   return (
     <button
