@@ -63,6 +63,7 @@ const Card = ({ recipe, accomodation = false }) => {
               className="recipe-image h-[200px] w-[200px]"
               style={backgroundImageStyle}
             ></div>
+            <br />
             <h3 className="font-bold">{recipe.title}</h3>
             {/* Toggle button */}
 

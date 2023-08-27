@@ -39,7 +39,7 @@ export default function Questions() {
         headers: {
           'Content-Type': 'application/json', // Set the correct content type
         },
-        body: JSON.stringify({ recipeData: modelData}),
+        body: JSON.stringify({ recipeData: modelData }),
       });
 
       if (response.ok) {
@@ -69,35 +69,35 @@ export default function Questions() {
   return (
     <>
       <div className='lg:m-auto lg:max-w-[40%] m-[10%]'>
-      <h1 className="text-2xl font-medium text-white mb-4">Ingredients 🧂</h1>
+        <h1 className="text-2xl font-medium text-white mb-4">Ingredients 🧂</h1>
         <br />
         <div className='bg-card rounded-3xl flex flex-row justify-start'>
-          
-<ul className="bg-white p-5 w-full rounded-2xl">
-  {modelData.map((item, index) => {
-    const itemNameWithoutUnderscores = item.name.replace(/_/g, ' ');
 
-    return (
-      <li key={index} className='flex gap-4 justify-between m-3'>
+          <ul className="bg-white p-5 w-full rounded-2xl">
+            {modelData.map((item, index) => {
+              const itemNameWithoutUnderscores = item.name.replace(/_/g, ' ');
 
-        <div className='flex'>
+              return (
+                <li key={index} className='flex gap-4 justify-between m-3'>
 
-        • {itemNameWithoutUnderscores}
+                  <div className='flex'>
 
-        </div>
+                    • {itemNameWithoutUnderscores}
 
-        <button
-          onClick={() => {
-            setModelData(modelData.filter((item, i) => i !== index))
-          }}
-          className='hover:bg-red-500 rounded-full transition-all hover:text-white flex flex-row justify-right'
-        >
-          ❌
-        </button>
-      </li>
-    );
-  })}
-</ul>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setModelData(modelData.filter((item, i) => i !== index))
+                    }}
+                    className='hover:bg-red-500 rounded-full transition-all hover:text-white flex flex-row justify-right'
+                  >
+                    ❌
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         {/* Input text field that adds to ingredientList */}
         <form onSubmit={handleFormSubmit}>
@@ -116,12 +116,12 @@ export default function Questions() {
           >
             Add to List
           </button>
+
+          <button className='px-4 py-2 bg-white text-bg text-sm rounded-full cursor-pointer' onClick={sendData}>
+            Confirm →
+          </button>
         </form>
       </div>
-
-      <button className='px-4 py-2 bg-white text-bg text-sm rounded-full cursor-pointer' onClick={sendData}>
-          Confirm →
-      </button>
     </>
   )
 }

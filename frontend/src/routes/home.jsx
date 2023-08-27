@@ -11,7 +11,7 @@ export default function Home() {
         <img src="/img/pantry_palatte_logo.svg" className="h-48" />
 
         <h1 className="italic text-4xl font-medium text-white mb-4">
-          Pantry Palatte
+          Pantry Palate
         </h1>
 
         <p className="italic text-sm text-white mb-0.5">Eat safe,</p>
