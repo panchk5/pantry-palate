@@ -145,8 +145,9 @@ export default function Shop() {
           <br />
           <div className="h-[3px] w-28 bg-white justify-center mb-8"></div>
           <div className=" flex flex-col gap-5 text-white mb-2 p-3">
-            <p>1. Enter some prompts on dietary restrictions, and allergies</p>
-            <p>2. Enter missing allergies, one ingredient per line!</p>
+            <p>1. Enter your dietary restrictions, and allergies</p>
+            <p>2. Enter missing allergies, one ingredient per line</p>
+            <p>3. Discover some awesome recipes, perfect for you!</p>
           </div>
         </div>
 

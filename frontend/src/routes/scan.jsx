@@ -9,6 +9,7 @@ export default function Scan() {
   const [cameraStatus, setCameraStatus] = useState(false);
   const { modelData, setModelData } = useContext(Data);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const startCamera = async () => {
     try {
@@ -45,6 +46,7 @@ export default function Scan() {
   };
 
   const sendData = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch('http://127.0.0.1:5000/upload-image', {
         method: 'POST',
@@ -67,7 +69,7 @@ export default function Scan() {
       setModelData(_data);
 
       // redirect to questions page
-      navigate('/questions')
+      navigate('/questions');
     } catch (error) {
       console.error('Error sending image data:', error);
     }
@@ -86,7 +88,7 @@ export default function Scan() {
             playsInline
           />
 
-          <a className='fixed bottom-20 left-10 bg-dark text-white rounded-full py-2 px-4' href="/scan">&lt;</a>
+          <a className='mb-2 lg:mb-0 fixed bottom-20 left-10 bg-dark text-white rounded-full py-2 px-4' href="/scan">&lt;</a>
 
           <button
             className='w-16 h-16 mt-8 rounded-full bg-white text-white'
@@ -109,8 +111,10 @@ export default function Scan() {
             />
           </div>
 
+          <h1 className='text-white text-center'>{isLoading ? "Loading..." : ""}</h1>
+
           <div className='fixed bottom-10 left-5 right-5 p-5 flex justify-between'>
-          <button
+            <button
               className='bg-white text-white rounded-full py-2 px-2 flex items-center justify-center'
               onClick={() => {
                 setCapturedImage('');
@@ -120,7 +124,7 @@ export default function Scan() {
               <img src="/img/retake.svg" className="h-6 m-auto" />
             </button>
 
-            <button 
+            <button
               className='px-4 py-2 bg-white text-bg text-sm rounded-full cursor-pointer'
               onClick={sendData}
             >
@@ -130,8 +134,6 @@ export default function Scan() {
         </>
 
       )}
-
-      
 
 
       {!cameraStatus && !capturedImage && (
@@ -145,8 +147,8 @@ export default function Scan() {
             <br />
             <div className="h-[3px] w-28 bg-white justify-center mb-8"></div>
             <div className=' flex flex-col gap-5 text-white mb-2 p-3'>
-              <p>1. Please allow camera perimissions</p>
-              <p>2. Place the camera in front of objects in a fridge </p>
+              <p>1. Please allow camera permissions</p>
+              <p>2. Place the camera in front of objects in a fridge and take a photo </p>
               <p>3. Upon scanning the items, it will generate a list of ingredients. Please add/remove the ingredients as you so choose</p>
               <p>4. Happy cooking!</p>
             </div>
@@ -155,7 +157,7 @@ export default function Scan() {
           <div className='fixed bottom-5 left-5 right-5 p-5 flex justify-between'>
             <a className='bg-dark text-white rounded-full py-2 px-4' href="/">&lt;</a>
 
-            <button 
+            <button
               className='px-4 py-2 bg-white text-bg text-sm rounded-full'
               onClick={startCamera}
             >

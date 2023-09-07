@@ -13,12 +13,19 @@ export default function Recipes() {
 
   return (
     <>
+      <div className="flex justify-between mx-[10%]">
+        <a className='bg-dark text-white rounded-full p-2 px-5' href="/scan">&lt;</a>
+        <a className='bg-white rounded-3xl text-bg py-2 px-4 transition-all border-2 flex flex-row justify-center'
+          href="/">Home</a>
+      </div>
+
       <div className="lg:m-auto lg:max-w-[40%] m-[10%]">
         <h1 className="text-2xl font-medium text-white mb-4">Ingredients 🧂</h1>
         {recipes.map((recipe) => (
           <Card key={recipe.id} recipe={recipe} />
         ))}
       </div>
+
     </>
   );
 }

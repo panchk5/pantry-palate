@@ -6,16 +6,21 @@ import io
 import os
 import json
 from dotenv import load_dotenv
+from vision import image_ai
+from recipe import make_recipe, get_recipe, find_recipe
+import requests
+
 load_dotenv()
+
+voiceFlowKey = os.getenv("VOICEFLOW_API_KEY")
+frontendUrl = os.getenv("FRONTEND_URL")
 
 app = Flask(__name__)
 CORS(app)
-CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=[frontendUrl])
 
 upload_folder = './assets'
 
-from vision import image_ai
-from recipe import make_recipe, get_recipe, find_recipe
 
 @app.route('/upload-image', methods=['POST'])
 def handle_image_upload():
@@ -30,7 +35,7 @@ def handle_image_upload():
             f.write(decoded_data)
 
         # returns as json
-        result = image_ai('./assets/test_image.jpg')
+        result = image_ai('./assets/uploaded_image_.jpg')
         
         return result
         # return jsonify({'message': 'Image uploaded and processed successfully'})
@@ -86,30 +91,28 @@ def retrieve_recipe_with_restrictions():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# @app.route('/chatbot', methods=['POST'])
-# def retrieve_ingred():
-#     try:
-#         api_key = "VF.DM.64de5b79aa29af0007d93ee5.rnjQQkq2Rpp9DyPt"  # Replace with your Voiceflow API key
+@app.route('/chatbot', methods=['POST'])
+def chatbot_interaction():
+    try:
+        api_key = voiceFlowKey 
+        user_id = "user_123" 
 
-#         user_id = "user_123"  # Unique ID used to track conversation state
+        data = request.get_json()
+        message = data.get('message', '')
 
-#         data = request.get_json()
-#         message = data.get('message', '')
+        body = {"action": {"type": "text", "payload": message}}
 
-
-#         body = {"action": {"type": "text", "payload": message}}  # Use the actual message
-
-#         response = requests.post(
-#             f"https://general-runtime.voiceflow.com/state/user/{user_id}/interact",  # Update the endpoint
-#             json=body,
-#             headers={"Authorization": api_key},
-#         )
+        response = requests.post(
+            f"https://general-runtime.voiceflow.com/state/user/{user_id}/interact",
+            json=body,
+            headers={"Authorization": api_key},
+        )
         
-#         response_data = response.json()  # Get the JSON content from the response
-#         return jsonify(response_data)  # Return the JSON response
+        response_data = response.json()
+        return jsonify(response_data)
         
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -54,11 +54,14 @@ export default function AccommodationRecipe() {
 
   return (
     <>
-      <p>THIS BETTER WORK...</p>
-      {recipeData?.results &&
-        recipeData.results.map((recipe) => (
-          <Card key={recipe.id} recipe={recipe} accomodation={true} />
-        ))}
+      <div className='lg:m-auto lg:max-w-[40%] m-[10%]'>
+      <h1 className="text-2xl font-medium text-white mb-4">Recipes</h1>
+
+        {recipeData?.results &&
+          recipeData.results.map((recipe) => (
+            <Card key={recipe.id} recipe={recipe} accomodation={true} />
+          ))}
+      </div>
     </>
   );
 }
